@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<!-- 打印查询语句 -->
+		<setting name="logImpl" value="STDOUT_LOGGING" />
+	</settings>
+	<typeAliases>
+        <!--school-->
+		<typeAlias alias="school" type="com.project.school.models.School" />
+		<typeAlias alias="student" type="com.project.school.models.Student" />
+        <typeAlias alias="company" type="com.project.school.models.Company" />
+        <typeAlias alias="joinArmy" type="com.project.school.models.JoinArmy" />
+        <typeAlias alias="postgraduate" type="com.project.school.models.Postgraduate" />
+        <typeAlias alias="civilServant" type="com.project.school.models.CivilServant" />
+        <typeAlias alias="entrepreneurship" type="com.project.school.models.Entrepreneurship" />
+
+        <!--school-->
+        <typeAlias alias="user" type="com.project.user.models.User" />
+        <typeAlias alias="code" type="com.project.user.models.Code" />
+	</typeAliases>
+	<!-- 配置分页插件 -->
+	<plugins>
+		<plugin interceptor="com.github.pagehelper.PageHelper">
+			<property name="dialect" value="mysql" />
+		</plugin>
+	</plugins>
+	<mappers>
+        <!--school-->
+		<mapper resource="com/project/school/models/UserLoginMapper.xml" />
+		<mapper resource="com/project/school/models/StudentMapper.xml" />
+        <mapper resource="com/project/school/models/CompanyMapper.xml" />
+        <mapper resource="com/project/school/models/JoinArmyMapper.xml" />
+        <mapper resource="com/project/school/models/PostgraduateMapper.xml" />
+        <mapper resource="com/project/school/models/CivilServantMapper.xml" />
+        <mapper resource="com/project/school/models/EntrepreneurshipMapper.xml" />
+        <!--school-->
+
+        <mapper resource="com/project/user/models/UserMapper.xml" />
+        <mapper resource="com/project/user/models/CodeMapper.xml" />
+	</mappers>
+</configuration> 

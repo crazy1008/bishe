@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.school.dao.StudentDao">
+	<resultMap type="com.project.school.models.Student" id="studentMap">
+		<result column="student_id" property="studentId" />
+		<result column="student_school_id" property="studentSchoolId" />
+		<result column="student_department_id" property="studentDepartmentId" />
+		<result column="student_major_id" property="studentMajorId" />
+		<result column="school_id" property="schoolId" />
+		<result column="department_id" property="departmentId" />
+		<result column="major_id" property="majorId" />
+		<result column="school_name" property="schoolName" />
+		<result column="department_name" property="departmentName" />
+		<result column="student_sex" property="studentSex" />
+		<result column="major_name" property="majorName" />
+		<result column="student_no" property="studentNo" />
+		<result column="student_name" property="studentName" />
+		<result column="student_class" property="studentClass" />
+		<result column="student_openDate" property="studentOpenDate" />
+		<result column="student_expireDate" property="studentExpireDate" />
+		<result column="employment_status_name" property="employmentStatusName" />
+		<result column="employment_status_id" property="employmentStatusId" />
+		<result column="state_id" property="stateId" />
+	</resultMap>
+	<select id="searchAll" resultMap="studentMap">
+		SELECT
+		student_id,
+		student_no,
+		school_name,
+		department_name,
+		major_name,
+		student_name,
+		student_sex,
+		student_class,
+		student_openDate,
+		student_expireDate,
+		employment_status_name,
+		employment_status_id,
+		state_id
+		FROM
+		t_student student,
+		t_school school,
+		t_department department,
+		t_major major,
+		t_employment_status employment
+		WHERE
+		student.student_school_id = school.school_id
+		AND student.student_department_id = department.department_id
+		AND student.student_major_id = major.major_id
+		AND student.student_employment_status_id = employment.employment_status_id
+	</select>
+	<select id="search" resultMap="studentMap" parameterType="student">
+		SELECT *
+		FROM(
+		SELECT
+		student_id,
+		student_no,
+		school_name,
+		department_name,
+		major_name,
+		student_name,
+		student_sex,
+		student_class,
+		student_openDate,
+		student_expireDate,
+		employment_status_name,
+        employment_status_id,
+	    state_id
+		FROM
+		t_student student,
+		t_school school,
+		t_department department,
+		t_major major,
+		t_employment_status employment
+		where
+		student.student_school_id = school.school_id
+		AND student.student_department_id = department.department_id
+		AND student.student_major_id = major.major_id
+		AND student.student_employment_status_id = employment.employment_status_id) ss
+		<where>
+			<if test="studentName!=null and studentName!=''">
+				AND ss.student_name like #{studentName}
+			</if>
+			<if test="studentNo!=null and studentNo!=''">
+				AND ss.student_no = #{studentNo}
+			</if>
+			<if test="majorName!=null and majorName!=''">
+				AND ss.major_name like #{majorName}
+			</if>
+			<if test="departmentName!=null and departmentName!=''">
+				AND ss.department_name like #{departmentName}
+			</if>
+			<if test="schoolName!=null and schoolName!=''">
+				AND ss.school_name like CONCAT(CONCAT("%",#{schoolName},"%"))
+			</if>
+			<if test="employmentStatusName!=null and employmentStatusName!=''">
+				AND ss.employment_status_name = #{employmentStatusName}
+			</if>
+		</where>
+	</select>
+</mapper>

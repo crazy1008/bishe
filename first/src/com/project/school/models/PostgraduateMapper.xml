@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.school.dao.StudentDao">
+    <resultMap id="postgraduateMap" type="postgraduate">
+        <id column="postgraduate_id" property="postgraduateId"></id>
+        <result column="postgraduate_school" property="postgraduateSchool"></result>
+        <result column="postgraduate_major" property="postgraduateMajor"></result>
+        <result column="postgraduate_tutor" property="postgraduateTutor"></result>
+    </resultMap>
+    <select id="postgraduate" resultMap="postgraduateMap" parameterType="java.lang.Integer">
+        SELECT postgraduate_id,
+        postgraduate_school,
+        postgraduate_major,
+        postgraduate_tutor
+        FROM t_postgraduate
+        WHERE postgraduate_id =#{stateId}
+    </select>
+</mapper>

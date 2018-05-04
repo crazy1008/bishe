@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.school.dao.StudentDao">
+	<resultMap type="company"
+		id="companyMap">
+		<result column="company_id" property="companyId" />
+		<result column="company_profile" property="companyProfile" />
+		<result column="company_name" property="companyName" />
+		<result column="chairman_company" property="chairmanCompany" />
+		<result column="company_environment" property="companyEnvironment" />
+		<result column="company_salary" property="companySalary" />
+		<result column="engage_work" property="engageWork" />
+		<result column="company_position" property="companyPosition" />
+	</resultMap>
+	<select id="obtainEmployment" resultMap="companyMap" parameterType="java.lang.Integer">
+		SELECT company_id,
+		company_profile,
+		company_name,
+		chairman_company,
+		company_position,
+		company_salary,
+		engage_work,
+		company_environment
+		FROM t_company company
+		where company.company_id =#{stateId}
+	</select>
+</mapper>

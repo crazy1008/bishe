@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.school.dao.StudentDao">
+    <resultMap id="joinArmyMap" type="joinArmy">
+        <id column="join_army_id" property="joinArmyId"></id>
+        <result column="join_army_military_region" property="joinArmyMilitaryRegion"></result>
+        <result column="join_army_arms" property="joinArmyArms"></result>
+        <result column="join_army_leadership" property="joinArmyLeadership"></result>
+    </resultMap>
+    <select id="joinArmy" resultMap="joinArmyMap" parameterType="java.lang.Integer" >
+        SELECT join_army_id,
+        join_army_military_region,
+        join_army_arms,
+        join_army_leadership
+        FROM t_join_army
+        WHERE join_army_id =#{stateId}
+    </select>
+</mapper>
